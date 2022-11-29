@@ -14,7 +14,7 @@
 /*--------------------------------------------------------*/
 
 #include <stdint.h>
-
+#include "Mc32DriverAdc.h"
 
 
 /*--------------------------------------------------------*/
@@ -27,6 +27,9 @@ typedef struct {
     uint8_t absAngle;    // Angle  0 à 180
     int8_t SpeedSetting; // consigne vitesse -99 à +99
     int8_t AngleSetting; // consigne angle  -90 à +90
+    
+    S_ADCResults AdcResBuff[10]; // Données ADC
+    uint8_t cntAdc;
 } S_pwmSettings;
 
 extern S_pwmSettings PWMData; 

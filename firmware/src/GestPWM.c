@@ -14,9 +14,12 @@
 
 
 #include "GestPWM.h"
+#include "Mc32DriverAdc.h"
+#include "APP.h"
 
 S_pwmSettings PWMData;      // pour les settings
-
+S_ADCResults ReadAdc;
+        
 void GPWM_Initialize(S_pwmSettings *pData)
 {
    // Init les data 
@@ -30,8 +33,14 @@ void GPWM_Initialize(S_pwmSettings *pData)
 // Obtention vitesse et angle (mise a jour des 4 champs de la structure)
 void GPWM_GetSettings(S_pwmSettings *pData)	
 {
+     
     // Lecture du convertisseur AD
-    
+    if(pData->cntAdc < 1)
+    {
+        
+    }
+
+    pData->ADCres[0] = BSP_ReadAllADC();
     // conversion
     
 }
