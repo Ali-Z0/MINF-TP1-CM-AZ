@@ -147,9 +147,11 @@ void APP_Tasks ( void )
         {
             /* Initialisation Displaying */
             lcd_init(); 
-            printf_lcd("Tp0 Led+AD 2022-23");
+            printf_lcd("TP1 PWM 2022-2023");
             lcd_gotoxy(1,2);
             printf_lcd("Ali Zoubir"); 
+            lcd_gotoxy(1,3);
+            printf_lcd("Caroline Miéville"); 
             lcd_bl_on();
             
             /* Peripherals initalisations */
@@ -164,35 +166,11 @@ void APP_Tasks ( void )
         }
         case APP_STATE_WAIT:
         {
+            
             break;
         }
         case APP_STATE_SERVICE_TASKS:
         {
-            /* Turn off lights once */
-            if (LedOffFlag != 0)
-            {
-                LedOffFlag = 0;
-                APP_LedMask(0);
-            }
-            /* Update ADC results values */
-            appData.AdcRes = BSP_ReadAllADC();
-            
-            /* If chenillard reached left */
-            if(chenillard == 0b10000000)
-                /* Restart chenillard */
-                chenillard = 0b00000001;
-            else
-                /* Shift chenillard's active LED */
-                chenillard = chenillard << 1;
-            /* Display LEDS depending on chenillard */
-            APP_LedMask(chenillard);
-            
-            /* Change state */
-            APP_UpdateState(APP_STATE_WAIT);
-            
-            /* Display ADC values */
-            lcd_gotoxy(1,3);
-            printf_lcd("CH0 %.4d CH1 %.4d", appData.AdcRes.Chan0, appData.AdcRes.Chan1); 
             
             break;
         }
