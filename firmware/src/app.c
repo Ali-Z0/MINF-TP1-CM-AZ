@@ -152,7 +152,7 @@ void APP_Tasks ( void )
             break;
         }
 
-        case APP_STATE_SERVICE_TASKS:
+        case APP_STATE_SERVICE_TASKS: 
         {
         
             break;
