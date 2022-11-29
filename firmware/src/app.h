@@ -58,6 +58,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdlib.h>
 #include "system_config.h"
 #include "system_definitions.h"
+#include "Mc32DriverAdc.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -66,6 +67,9 @@ extern "C" {
 
 #endif
 // DOM-IGNORE-END 
+    
+#define TEMPS_INIT 30
+#define INIT_TIME_ENABLE
 
 // *****************************************************************************
 // *****************************************************************************
@@ -88,6 +92,7 @@ typedef enum
 {
 	/* Application's state machine's initial state. */
 	APP_STATE_INIT=0,
+    APP_STATE_WAIT,
 	APP_STATE_SERVICE_TASKS,
 
 	/* TODO: Define states used by the application state machine. */
@@ -112,11 +117,12 @@ typedef struct
 {
     /* The application's current state */
     APP_STATES state;
+    /* ADC Results measurements */
+    S_ADCResults AdcRes;
 
     /* TODO: Define any additional data used by the application. */
 
 } APP_DATA;
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -198,6 +204,35 @@ void APP_Initialize ( void );
 
 void APP_Tasks( void );
 
+/*******************************************************************************
+  Function:
+    void APP_UpdateState ( APP_STATES newState )
+
+  Summary:
+    Update the state machine with new state
+
+  Description:
+       This function updates the state machin variable
+
+  Parameters:
+    New state.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+    APP_UpdateState(APP_STATE_WAIT);
+    </code>
+
+  Remarks:
+    This routine must be called from SYS_Tasks() routine.
+ */
+
+void APP_UpdateState(APP_STATES newState);
+
+
+void APP_LedMask(uint8_t LedVal);
 
 #endif /* _APP_H */
 

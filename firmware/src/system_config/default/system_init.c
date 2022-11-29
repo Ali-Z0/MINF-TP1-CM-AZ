@@ -150,7 +150,10 @@ void SYS_Initialize ( void* data )
     BSP_Initialize();        
 
     /* Initialize Drivers */
-
+    /*Initialize TMR0 */
+    DRV_TMR0_Initialize();
+ 
+ 
     /* Initialize System Services */
     SYS_PORTS_Initialize();
 
