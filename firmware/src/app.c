@@ -156,9 +156,11 @@ void APP_Tasks ( void )
             
             /* Peripherals initalisations */
             // DRV_TMR0_Start();
-            BSP_InitADC10();
             APP_UpdateState(APP_STATE_WAIT);
+            BSP_InitADC10();
             
+            
+            // Coucou je suis caro
             /* All LEDS ON */
             APP_LedMask(0xFF);
             
