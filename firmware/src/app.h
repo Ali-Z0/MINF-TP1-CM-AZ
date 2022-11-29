@@ -118,7 +118,8 @@ typedef struct
     /* The application's current state */
     APP_STATES state;
     /* ADC Results measurements */
-    S_ADCResults AdcRes;
+    S_ADCResults AdcResBuff[10];
+    // float AdcFiltered = 0;
 
     /* TODO: Define any additional data used by the application. */
 

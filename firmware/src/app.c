@@ -54,8 +54,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "app.h"
+#include "GestPWM.h"
 #include "Mc32DriverLcd.h"
 #include "Mc32Delays.h"
+#include "GestPWM.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -79,6 +81,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 */
 
 APP_DATA appData;
+S_pwmSettings PwmData;
+
 uint8_t LedOffFlag = 1;
 uint8_t chenillard = 0b00000001;
 
@@ -155,14 +159,16 @@ void APP_Tasks ( void )
             lcd_bl_on();
             
             /* Peripherals initalisations */
-            // DRV_TMR0_Start();
-            APP_UpdateState(APP_STATE_WAIT);
+            // DRV_TMR0_Start();      
             BSP_InitADC10();
             
+            /* Initialize GPWM */
+            GPWM_Initialize(&PwmData);
             
-            // Coucou je suis caro
+            APP_UpdateState(APP_STATE_WAIT);
+            
             /* All LEDS ON */
-            APP_LedMask(0xFF);
+            APP_LedMask(0x00);
             
             break;
         }
@@ -188,6 +194,8 @@ void APP_Tasks ( void )
         }
     }
 }
+
+
 
 void APP_UpdateState(APP_STATES newState)
 {

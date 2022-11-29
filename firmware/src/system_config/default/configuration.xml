@@ -166,7 +166,7 @@
       <Template dnOrder="0">
         <Name dnOrder="0">sys_ports_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/system/ports/src</Path>
-        <Checksum dnOrder="2">499BACC6ADF94CB998456312F6BD4BFD</Checksum>
+        <Checksum dnOrder="2">BC814B1E833F48A33953D65B71BC498D</Checksum>
       </Template>
       <Template dnOrder="1">
         <Name dnOrder="0">system_init.c</Name>
@@ -229,7 +229,7 @@
       <Template dnOrder="13">
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">548163F0A242DE3065E14FAE95C5E88C</Checksum>
+        <Checksum dnOrder="2">A598E174252412AA06B16826B550D2AF</Checksum>
       </Template>
       <Template dnOrder="14">
         <Name dnOrder="0">app.h</Name>
@@ -238,12 +238,12 @@
       <Template dnOrder="15">
         <Name dnOrder="0">drv_tmr_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/tmr/src</Path>
-        <Checksum dnOrder="2">FF7FB362F35DE028DD306C83F30CF6D1</Checksum>
+        <Checksum dnOrder="2">B2F12BE10354262EBF0AFBBEBDD70E54</Checksum>
       </Template>
       <Template dnOrder="16">
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">0194ACC2704F9E5A360975806B8C9602</Checksum>
+        <Checksum dnOrder="2">5BE085424E38ACF8153C2016D1B7E7D6</Checksum>
       </Template>
       <Template dnOrder="17">
         <Name dnOrder="0">sys_clk_pic32mx.c</Name>

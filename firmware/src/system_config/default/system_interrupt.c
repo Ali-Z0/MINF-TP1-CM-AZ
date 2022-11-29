@@ -71,9 +71,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
  
 
-void __ISR(_TIMER_2_VECTOR, ipl4AUTO) IntHandlerDrvTmrInstance0(void)
+void __ISR(_TIMER_1_VECTOR, ipl4AUTO) IntHandlerDrvTmrInstance0(void)
 {
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
 }
  /*******************************************************************************
  End of File
