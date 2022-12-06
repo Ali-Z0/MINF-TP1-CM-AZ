@@ -1,6 +1,6 @@
 build/default/production/_ext/340578644/sys_devcon.o: \
  ../src/system_config/default/framework/system/devcon/src/sys_devcon.c \
- ../src/system_config/default/framework/system/devcon/src/sys_devcon_local.h \
+ ../../../../../../framework/system/devcon/src/sys_devcon_local.h \
  ../src/system_config/default/system_config.h \
  ../../../../../../bsp/pic32mx_skes/bsp.h \
  ../../../../../../framework/peripheral/ports/plib_ports.h \
@@ -54,7 +54,7 @@ build/default/production/_ext/340578644/sys_devcon.o: \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteControl_Default.h \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteInProgress_Default.h \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h \
- ../src/system_config/default/framework/system/devcon/sys_devcon.h \
+ ../../../../../../framework/system/devcon/sys_devcon.h \
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/common/sys_common.h \
  ../../../../../../framework/system/common/sys_module.h \
@@ -152,7 +152,7 @@ build/default/production/_ext/340578644/sys_devcon.o: \
  ../../../../../../framework/peripheral/osc/processor/../templates/osc_PLLBypass_Unsupported.h \
  ../../../../../../framework/peripheral/osc/processor/../templates/osc_BTPLLClockOut_Unsupported.h
 
-../src/system_config/default/framework/system/devcon/src/sys_devcon_local.h:
+../../../../../../framework/system/devcon/src/sys_devcon_local.h:
 
 ../src/system_config/default/system_config.h:
 
@@ -260,7 +260,7 @@ build/default/production/_ext/340578644/sys_devcon.o: \
 
 ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h:
 
-../src/system_config/default/framework/system/devcon/sys_devcon.h:
+../../../../../../framework/system/devcon/sys_devcon.h:
 
 ../../../../../../framework/system/system.h:
 

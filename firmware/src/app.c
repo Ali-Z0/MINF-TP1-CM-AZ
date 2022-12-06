@@ -159,18 +159,24 @@ void APP_Tasks ( void )
             lcd_bl_on();
             
             /* Peripherals initalisations */
+            /*initalisation des timers*/
             // DRV_TMR0_Start();  
             DRV_TMR0_Start();
-            
             // DRV_TMR1_Start();  
-            DRV_TMR1_Start();
-            
+            DRV_TMR1_Start();           
             // DRV_TMR2_Start();  
-            DRV_TMR2_Start();
-            
+            DRV_TMR2_Start();            
             // DRV_TMR3_Start();  
             DRV_TMR3_Start();
-                      
+            
+            /*Initialisation des OC*/
+            //init OC0 
+            void DRV_OC0_Enable(void);
+            void DRV_OC0_Start(void);
+            //init OC1 
+            void DRV_OC1_Enable(void);
+            void DRV_OC1_Start(void); 
+            
             //Initialisation l'ADc
             BSP_InitADC10();
             
