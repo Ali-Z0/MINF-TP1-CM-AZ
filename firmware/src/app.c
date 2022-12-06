@@ -159,8 +159,21 @@ void APP_Tasks ( void )
             lcd_bl_on();
             
             /* Peripherals initalisations */
-            // DRV_TMR0_Start();      
+            // DRV_TMR0_Start();  
+            DRV_TMR0_Start();
+            
+            // DRV_TMR1_Start();  
+            DRV_TMR1_Start();
+            
+            // DRV_TMR2_Start();  
+            DRV_TMR2_Start();
+            
+            // DRV_TMR3_Start();  
+            DRV_TMR3_Start();
+                      
+            //Initialisation l'ADc
             BSP_InitADC10();
+            
             
             /* Initialize GPWM */
             GPWM_Initialize(&PwmData);
