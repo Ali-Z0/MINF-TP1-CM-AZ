@@ -48,20 +48,22 @@ void GPWM_GetSettings(S_pwmSettings *pData)
     pData->absAngle = abs(pData->AngleSetting);
     
     
-    
-    
-    
-
-    
-    // conversion
-    
 }
 
 
 // Affichage des information en exploitant la structure
 void GPWM_DispSettings(S_pwmSettings *pData)
-{
-    
+{   
+            lcd_gotoxy(1,1);
+            printf_lcd("TP1 PWM 2022-2023");
+            lcd_gotoxy(1,2);
+            printf_lcd("SpeedSetting %f", pData->SpeedSetting); 
+            lcd_gotoxy(1,3);
+            printf_lcd("absSpeed, %f", pData->absSpeed);
+            lcd_gotoxy(1,4);
+            printf_lcd("Angle, %f", pData->AngleSetting);
+            
+            
 }
 
 // Execution PWM et gestion moteur à partir des info dans structure
