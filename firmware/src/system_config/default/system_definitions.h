@@ -49,6 +49,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdbool.h>
 #include "system/common/sys_common.h"
 #include "system/common/sys_module.h"
+#include "driver/oc/drv_oc.h" 
 #include "system/devcon/sys_devcon.h"
 #include "system/clk/sys_clk.h"
 #include "system/int/sys_int.h"
@@ -90,6 +91,9 @@ extern "C" {
 typedef struct
 {
     SYS_MODULE_OBJ  drvTmr0;
+    SYS_MODULE_OBJ  drvTmr1;
+    SYS_MODULE_OBJ  drvTmr2;
+    SYS_MODULE_OBJ  drvTmr3;
 
 
 } SYSTEM_OBJECTS;
