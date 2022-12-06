@@ -171,11 +171,11 @@ void APP_Tasks ( void )
             
             /*Initialisation des OC*/
             //init OC0 
-            void DRV_OC0_Enable(void);
-            void DRV_OC0_Start(void);
+            DRV_OC0_Enable();
+            DRV_OC0_Start();
             //init OC1 
-            void DRV_OC1_Enable(void);
-            void DRV_OC1_Start(void); 
+            DRV_OC1_Enable();
+            DRV_OC1_Start(); 
             
             //Initialisation l'ADc
             BSP_InitADC10();
