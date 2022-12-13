@@ -28,15 +28,18 @@
 
 
 typedef struct {
+    
+    /* Variables consignes */
     uint8_t absSpeed;    // vitesse 0 à 99
     uint8_t absAngle;    // Angle  0 à 180
     int8_t SpeedSetting; // consigne vitesse -99 à +99
     int8_t AngleSetting; // consigne angle  -90 à +90
     
+    /* Variables ADC */
     S_ADCResults AdcResBuff[FILTER_SIZE]; // Données ADC
     float adcResFilt_Can0;
     float adcResFilt_Can1;
-    uint8_t cntAdc;
+    uint8_t cntAdc;  
 } S_pwmSettings;
 
 extern S_pwmSettings PWMData; 
