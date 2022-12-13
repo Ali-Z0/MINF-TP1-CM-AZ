@@ -178,6 +178,8 @@ void APP_Tasks ( void )
             //Initialisation l'ADc
             BSP_InitADC10();
             
+            //initialiser le Hbrige
+            BSP_EnableHbrige();
             
             /* Initialize GPWM */
             GPWM_Initialize(&PwmData);
