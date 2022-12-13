@@ -80,8 +80,52 @@ void GPWM_DispSettings(S_pwmSettings *pData)
 // Execution PWM et gestion moteur à partir des info dans structure
 void GPWM_ExecPWM(S_pwmSettings *pData)
 {
+ float old_Data;
+ static int i_speeed;
+ static int i_angle; 
     
-}
+    //tourner le moteur de gauche à droite.............................
+    if(pData->SpeedSetting <= 1)
+    {
+        AIN1_HBRIDGE_W = 1; //AIN1 High
+        AIN2_HBRIDGE_W = 0; //AIN2 LOW
+        STBY_HBRIDGE_W = 1; // STBY High
+    }
+    //tourner le moteur de droite à gauche.........................
+    if (pData->SpeedSetting >= 1)
+    {
+        AIN1_HBRIDGE_W = 0; //AIN1 LOW
+        AIN2_HBRIDGE_W = 1; //AIN2 High
+        STBY_HBRIDGE_W = 1; // STBY High
+    }
+    else 
+    {
+        //moteur ne tourne plus, il passe en stanby
+        STBY_HBRIDGE_W = 0; // STBY LOW       
+    }
+    //déterminer le nombre d'impulsion pour OC2 à partir de absSpeed
+    old_Data = pData->absSpeed; 
+    if ( old_Data != pData->absSpeed)
+    {
+        i_speeed ++;
+    }
+    //Déterminer la valeur cyclique du PWM
+    PLIB_OC_PulseWidth16BitSet(i_speeed,pData->absSpeed);
+    //déterminer le nombre d'impulsion pour OC3 à partir de absAngle
+      old_Data = pData->AngleSetting; 
+    if ( old_Data != pData->AngleSetting)
+    {
+        i_angle ++;
+    }
+    
+    //génération d'une impulsion dont la largeur est proportionnelle à l'angle
+    PLIB_OC_PulseWidth16BitSet(i_angle,pData->AngleSetting);
+    
+ }
+    
+   
+  
+    
 
 // Execution PWM software
 void GPWM_ExecPWMSoft(S_pwmSettings *pData)
