@@ -69,11 +69,35 @@ void GPWM_DispSettings(S_pwmSettings *pData)
 // Execution PWM et gestion moteur à partir des info dans structure
 void GPWM_ExecPWM(S_pwmSettings *pData)
 {
-    //gestion du pont en H
+    //tourner le moteur de gauche à droite.............................
+    if(pData->absSpeed <= 1)
+    {
+        AIN1_HBRIDGE_W = 1; //AIN1 High
+        AIN2_HBRIDGE_W = 0; //AIN2 LOW
+        STBY_HBRIDGE_W = 1; // STBY High
+    }
+    //tourner le moteur de droite à gauche.........................
+    if (pData->absSpeed >= 1)
+    {
+        AIN1_HBRIDGE_W = 0; //AIN1 LOW
+        AIN2_HBRIDGE_W = 1; //AIN2 High
+        STBY_HBRIDGE_W = 1; // STBY High
+    }
+    else 
+    {
+        //moteur ne tourne plus, il passe en stanby
+        STBY_HBRIDGE_W = 0; // STBY LOW       
+    }
+    //Déterminer la valeur cyclique du PWM
+    PLIB_OC_PulseWidth16BitSet();
+    //génération d'une impulsion dont la largeur est proportionnelle à l'angle
+    PLIB_OC_PulseWidth16BitSet();
+    
+ }
+    
    
   
     
-}
 
 // Execution PWM software
 void GPWM_ExecPWMSoft(S_pwmSettings *pData)
