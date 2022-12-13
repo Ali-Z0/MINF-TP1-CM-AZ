@@ -70,14 +70,14 @@ void GPWM_DispSettings(S_pwmSettings *pData)
 void GPWM_ExecPWM(S_pwmSettings *pData)
 {
     //tourner le moteur de gauche à droite.............................
-    if(pData->absSpeed <= 1)
+    if(pData->SpeedSetting <= 1)
     {
         AIN1_HBRIDGE_W = 1; //AIN1 High
         AIN2_HBRIDGE_W = 0; //AIN2 LOW
         STBY_HBRIDGE_W = 1; // STBY High
     }
     //tourner le moteur de droite à gauche.........................
-    if (pData->absSpeed >= 1)
+    if (pData->SpeedSetting >= 1)
     {
         AIN1_HBRIDGE_W = 0; //AIN1 LOW
         AIN2_HBRIDGE_W = 1; //AIN2 High
