@@ -150,19 +150,7 @@ void SYS_Initialize ( void* data )
     BSP_Initialize();        
 
     /* Initialize Drivers */
-    /* Initialize the OC Driver */
-    DRV_OC0_Initialize();
-    DRV_OC1_Initialize();
-    /*Initialize TMR0 */
-    DRV_TMR0_Initialize();
-    /*Initialize TMR1 */
-    DRV_TMR1_Initialize();
-    /*Initialize TMR2 */
-    DRV_TMR2_Initialize();
-    /*Initialize TMR3 */
-    DRV_TMR3_Initialize();
- 
- 
+
     /* Initialize System Services */
     SYS_PORTS_Initialize();
 
