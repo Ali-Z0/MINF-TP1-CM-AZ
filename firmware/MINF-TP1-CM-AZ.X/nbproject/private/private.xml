@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< Updated upstream
         <group/>
+=======
+        <group>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF-TP1-CM-AZ/MINF-TP1-CM-AZ/firmware/src/GestPWM.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/bsp/pic32mx_skes/Mc32DriverAdc.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF-TP1-CM-AZ/MINF-TP1-CM-AZ/firmware/src/app.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/bsp/pic32mx_skes/Mc32DriverLcd.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF-TP1-CM-AZ/MINF-TP1-CM-AZ/firmware/src/GestPWM.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF-TP1-CM-AZ/MINF-TP1-CM-AZ/firmware/src/app.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/bsp/pic32mx_skes/Mc32DriverAdc.c</file>
+        </group>
+>>>>>>> Stashed changes
     </open-files>
 </project-private>

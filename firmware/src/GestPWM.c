@@ -75,6 +75,8 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
 // Execution PWM software
 void GPWM_ExecPWMSoft(S_pwmSettings *pData)
 {
+    pData->absSpeed;
+    
     
 }
 
