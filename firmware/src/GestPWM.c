@@ -15,15 +15,17 @@
 
 #include "GestPWM.h"
 #include "Mc32DriverAdc.h"
-#include "APP.h"
+#include "app.h"
 
-S_pwmSettings PWMData;      // pour les settings
-S_ADCResults ReadAdc;
+//S_pwmSettings PWMData;      // pour les settings
+//S_ADCResults ReadAdc;
+
+S_pwmSettings PwmData = {.cntAdc=0};
         
 void GPWM_Initialize(S_pwmSettings *pData)
 {
    // Init les data 
-    
+   
    // Init état du pont en H
     
    // lance les timers et OC
@@ -38,13 +40,13 @@ void GPWM_GetSettings(S_pwmSettings *pData)
     
     /* Calcul de la consigne de vitesse */
     pData->absSpeed = pData->adcResFilt_Can0 * SPEED_RATIO;
-    pData->SpeedSetting = (float)pData->absSpeed - (float)99;
+    pData->SpeedSetting = pData->absSpeed - 99;
     pData->absSpeed = abs(pData->SpeedSetting);
     
     
-    /* Calcul consigne de la vitesse */
+    /* Calcul consigne de l'angle */
     pData->absAngle = pData->adcResFilt_Can1 * (180 / ADC_RES);
-    pData->AngleSetting = (float)pData->absSpeed - (float)90;
+    pData->AngleSetting = pData->absAngle - 90;
     pData->absAngle = abs(pData->AngleSetting);
     
     
@@ -57,11 +59,20 @@ void GPWM_DispSettings(S_pwmSettings *pData)
             lcd_gotoxy(1,1);
             printf_lcd("TP1 PWM 2022-2023");
             lcd_gotoxy(1,2);
-            printf_lcd("SpeedSetting %f", pData->SpeedSetting); 
+            /* Affichage vitesse */
+            printf_lcd("SpeedSetting");
+            lcd_gotoxy(17,2);
+            printf_lcd("%4d", (int)pData->SpeedSetting);
+            /* Affichage vitesse absolue */
             lcd_gotoxy(1,3);
-            printf_lcd("absSpeed, %f", pData->absSpeed);
+            printf_lcd("absSpeed");
+            lcd_gotoxy(17,3);
+            printf_lcd("%4d", (int)pData->absSpeed);
+            /* Afficahge de l'angle */
             lcd_gotoxy(1,4);
-            printf_lcd("Angle, %f", pData->AngleSetting);
+            printf_lcd("Angle");
+            lcd_gotoxy(17,4);
+            printf_lcd("%4d", (int)pData->AngleSetting);
             
             
 }
@@ -75,21 +86,33 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
 // Execution PWM software
 void GPWM_ExecPWMSoft(S_pwmSettings *pData)
 {
-    pData->absSpeed;
+    static pwmCnt = 0;
+    
+    /* Gestion du PWM software */
+    if(pwmCnt < pData->absSpeed)
+    {
+        pwmCnt++;
+        BSP_LEDOn(BSP_LED_2);
+    }
+    else
+    {
+        BSP_LEDOff(BSP_LED_2);
+    }
     
     
 }
 
-uint8_t GPWM_ReadAdcFiltered(S_pwmSettings *pData)
+void GPWM_ReadAdcFiltered(S_pwmSettings *pData)
 {
     uint8_t i = 0; 
-    uint8_t flagZero = 0; 
+//    uint8_t flagZero = 0; 
     
-    /* Si le compteur de nombre d'échantillons pour filtrage atteint */
-    if(pData->cntAdc < FILTER_SIZE)
+    //lecture nouvelles valeurs ch0 et ch1
+    pData->AdcResBuff[pData->cntAdc] = BSP_ReadAllADC();
+    
+    //incrémentation compteur
+    if(pData->cntAdc < FILTER_SIZE-1)
     {
-        /* Sauvegarde les cannaux dans le buffer de mesure */
-        pData->AdcResBuff[pData->cntAdc] = BSP_ReadAllADC();
         /* Incremente le timer de filtrage */
         pData->cntAdc = pData->cntAdc +1;
     }
@@ -98,20 +121,39 @@ uint8_t GPWM_ReadAdcFiltered(S_pwmSettings *pData)
         /* Relance le filtrage */
         pData->cntAdc = 0;
     }
+    
+    
+//    
+//    /* Si le compteur de nombre d'échantillons pour filtrage atteint */
+//    if(pData->cntAdc < FILTER_SIZE)
+//    {
+//        /* Sauvegarde les cannaux dans le buffer de mesure */
+//        pData->AdcResBuff[pData->cntAdc] = BSP_ReadAllADC();
+//        /* Incremente le timer de filtrage */
+//        pData->cntAdc = pData->cntAdc +1;
+//    }
+//    else
+//    {
+//        /* Relance le filtrage */
+//        pData->cntAdc = 0;
+//    }
+    
     /* Somme du buffer pour le filtrage */
+    pData->adcResFilt_Can0 = 0;
+    pData->adcResFilt_Can1 = 0;
     for(i = 0; i<FILTER_SIZE; i++)
     {
-        pData->adcResFilt_Can0 = pData->adcResFilt_Can0 + pData->AdcResBuff[i].Chan0;
-        pData->adcResFilt_Can1 = pData->adcResFilt_Can1 + pData->AdcResBuff[i].Chan1;
+        pData->adcResFilt_Can0 += pData->AdcResBuff[i].Chan0;
+        pData->adcResFilt_Can1 += pData->AdcResBuff[i].Chan1;
         
-        if((pData->AdcResBuff[i].Chan0 == 0) || (pData->AdcResBuff[i].Chan1 == 0))
-            flagZero = 1;
+//        if((pData->AdcResBuff[i].Chan0 == 0) || (pData->AdcResBuff[i].Chan1 == 0))
+//            flagZero = 1;
     }  
-    /* Moyenne du buffer avec protection de division avec 0 */
-    if((pData->adcResFilt_Can0 != 0) && (pData->adcResFilt_Can1 != 0))
-    {
-        pData->adcResFilt_Can0 /= FILTER_SIZE;
-        pData->adcResFilt_Can1 /= FILTER_SIZE;
-    }
-    return flagZero;
+//    /* Moyenne du buffer avec protection de division avec 0 */
+//    if((pData->adcResFilt_Can0 != 0) && (pData->adcResFilt_Can1 != 0))
+//    {
+    pData->adcResFilt_Can0 /= (float)FILTER_SIZE;
+    pData->adcResFilt_Can1 /= (float)FILTER_SIZE;
+//    }
+//    return flagZero;
 }

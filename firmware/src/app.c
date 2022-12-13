@@ -81,7 +81,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 */
 
 APP_DATA appData;
-S_pwmSettings PwmData;
+
 
 uint8_t LedOffFlag = 1;
 uint8_t chenillard = 0b00000001;
@@ -155,7 +155,7 @@ void APP_Tasks ( void )
             lcd_gotoxy(1,2);
             printf_lcd("Ali Zoubir"); 
             lcd_gotoxy(1,3);
-            printf_lcd("Caroline Miéville"); 
+            printf_lcd("Caroline Mieville"); 
             lcd_bl_on();
             
             /* Peripherals initalisations */
@@ -171,10 +171,8 @@ void APP_Tasks ( void )
             
             /*Initialisation des OC*/
             //init OC0 
-            DRV_OC0_Enable();
             DRV_OC0_Start();
             //init OC1 
-            DRV_OC1_Enable();
             DRV_OC1_Start(); 
             
             //Initialisation l'ADc
@@ -182,7 +180,7 @@ void APP_Tasks ( void )
             
             
             /* Initialize GPWM */
-            GPWM_Initialize(&PwmData);
+            //GPWM_Initialize(&PwmData);
             
             APP_UpdateState(APP_STATE_WAIT);
             
@@ -198,7 +196,6 @@ void APP_Tasks ( void )
         }
         case APP_STATE_SERVICE_TASKS:
         {
-            
             break;
         }
 

@@ -55,7 +55,10 @@ build/default/production/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
  ../src/system_config/default/system_definitions.h \
  ../../../../../../../framework/system/common/sys_common.h \
  ../../../../../../../framework/system/common/sys_module.h \
- ../src/system_config/default/framework/system/devcon/sys_devcon.h \
+ ../../../../../../../framework/driver/oc/drv_oc.h \
+ ../../../../../../../framework/driver/driver_common.h \
+ ../src/system_config/default/framework/driver/oc/drv_oc_static.h \
+ ../../../../../../../framework/system/devcon/sys_devcon.h \
  ../../../../../../../framework/system/system.h \
  ../../../../../../../framework/system/clk/sys_clk.h \
  ../../../../../../../framework/peripheral/osc/plib_osc.h \
@@ -135,6 +138,10 @@ build/default/production/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
  ../../../../../../../framework/peripheral/int/processor/../templates/int_VariableOffset_Unsupported.h \
  ../../../../../../../framework/peripheral/int/processor/../templates/int_SoftwareNMI_Unsupported.h \
  ../../../../../../../framework/system/int/sys_int_mapping.h \
+ ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h \
+ ../../../../../../../framework/driver/tmr/drv_tmr.h \
+ ../../../../../../../framework/driver/tmr/tmr_definitions_pic32m.h \
+ ../../../../../../../framework/driver/tmr/drv_tmr_compatibility.h \
  ../../../../../../../framework/system/ports/sys_ports.h \
  ../../../../../../../framework/system/ports/sys_ports_definitions.h \
  ../src/app.h ../../../../../../../bsp/pic32mx_skes/Mc32DriverAdc.h \
@@ -255,7 +262,13 @@ build/default/production/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
 
 ../../../../../../../framework/system/common/sys_module.h:
 
-../src/system_config/default/framework/system/devcon/sys_devcon.h:
+../../../../../../../framework/driver/oc/drv_oc.h:
+
+../../../../../../../framework/driver/driver_common.h:
+
+../src/system_config/default/framework/driver/oc/drv_oc_static.h:
+
+../../../../../../../framework/system/devcon/sys_devcon.h:
 
 ../../../../../../../framework/system/system.h:
 
@@ -414,6 +427,14 @@ build/default/production/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
 ../../../../../../../framework/peripheral/int/processor/../templates/int_SoftwareNMI_Unsupported.h:
 
 ../../../../../../../framework/system/int/sys_int_mapping.h:
+
+../src/system_config/default/framework/driver/tmr/drv_tmr_static.h:
+
+../../../../../../../framework/driver/tmr/drv_tmr.h:
+
+../../../../../../../framework/driver/tmr/tmr_definitions_pic32m.h:
+
+../../../../../../../framework/driver/tmr/drv_tmr_compatibility.h:
 
 ../../../../../../../framework/system/ports/sys_ports.h:
 
