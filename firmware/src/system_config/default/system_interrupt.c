@@ -68,7 +68,48 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: System Interrupt Vector Functions
 // *****************************************************************************
 // *****************************************************************************
-
+void __ISR(_TIMER_1_VECTOR, ipl4AUTO) IntHandlerDrvTmrInstance0(void)
+{
+    //3 seconde initialisation
+    static uint32_t i = 0;
+    
+    //paramètrage du timer
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
+    
+    //incrémenté l'indice
+     i++;
+     
+     //Entré lorsque 3s on passer après l'initialisation
+    if (i == 150)
+    {
+        APP_UpdateState(APP_STATE_SERVICE_TASKS); 
+       //toggle LED0 a chaque entrée dans l'interuption
+        BSP_LEDToggle(BSP_LED_0);
+       //permet de ne pas attendre 3s après avoir déjà executer l'initialisation
+        i = 149;
+    }
+    else
+    {
+      //Lors de l'initialisation, va dans l'état vait jusqu'à attendre 3 seconde
+      APP_UpdateState(APP_STATE_WAIT);      
+    }
+    
+     
+}
+void __ISR(_TIMER_2_VECTOR, ipl0AUTO) IntHandlerDrvTmrInstance1(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
+}
+void __ISR(_TIMER_3_VECTOR, ipl0AUTO) IntHandlerDrvTmrInstance2(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
+}
+void __ISR(_TIMER_4_VECTOR, ipl4AUTO) IntHandlerDrvTmrInstance3(void)
+{
+    //toggle LED1 a chaque entrée dans l'interuption
+    BSP_LEDToggle(BSP_LED_1);
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_4);
+}
  
 /*******************************************************************************
  End of File
