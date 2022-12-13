@@ -110,7 +110,7 @@ void DRV_OC1_Initialize(void)
     PLIB_OC_BufferSizeSelect(OC_ID_3, OC_BUFFER_SIZE_16BIT);
     PLIB_OC_TimerSelect(OC_ID_3, OC_TIMER_16BIT_TMR3);
     PLIB_OC_Buffer16BitSet(OC_ID_3, 0);
-    PLIB_OC_PulseWidth16BitSet(OC_ID_3, 10);
+    PLIB_OC_PulseWidth16BitSet(OC_ID_3, 100);
 }
 
 void DRV_OC1_Enable(void)
