@@ -21,13 +21,13 @@
 /*--------------------------------------------------------*/
 // Définition des fonctions prototypes
 /*--------------------------------------------------------*/
-#define FILTER_SIZE 10
-#define ADC_RES 1023.0
-#define ABS_MAX_SPEED 198.0
-#define SPEED_RATIO (ABS_MAX_SPEED / ADC_RES)
+#define FILTER_SIZE 10                          // Taille du filtre coulissant
+#define ADC_RES 1023.0                          // Resolution de l'ADC
+#define ABS_MAX_SPEED 198.0                     // Vitesse abs. maximum (99*2)
+#define SPEED_RATIO (ABS_MAX_SPEED / ADC_RES)   // Ratio vitesse/ADC
 
-#define SERVO_MAX 0.0024
-#define SERVO_MIN 0.0006
+#define SERVO_MAX 0.0024                        // Temps max du servo [s]
+#define SERVO_MIN 0.0006                        // Temps min du servo [s]
 
 
 

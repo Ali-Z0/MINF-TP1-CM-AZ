@@ -133,11 +133,7 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
     /* Calcul de la largeur de la pulse en prenant directement en compte la frequence du timer */
     t3_Width = (DRV_TMR2_CounterFrequencyGet()/(1/(SERVO_MAX-SERVO_MIN)))*ratioAngle;
     /* Ajouter le minimum pour le servo moteur */
-    t3_Width += DRV_TMR2_CounterFrequencyGet()/(1/(SERVO_MIN));
-    //*(SERVO_MAX-SERVO_MIN)
-            
-    /* Calcul du rapport de la pulse avec l'angle */
-    //t3_Width = 9000 * (float)(pData->absAngle/90.0);
+    t3_Width += DRV_TMR2_CounterFrequencyGet()/(1/(SERVO_MIN));    
     //génération d'une impulsion dont la largeur est proportionnelle à l'angle
     PLIB_OC_PulseWidth16BitSet(_OCMP3_BASE_ADDRESS, t3_Width);
     
@@ -147,25 +143,19 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
 void GPWM_ExecPWMSoft(S_pwmSettings *pData)
 {
     static uint8_t pwmCnt;
-    /* 100 cycles */
     
+    /* Incrément PWM */
     pwmCnt++;
     
-    /* Gestion du temps ON, INVERSE CAR OPEN-DRAIN */
+    /* Gestion du temps ON, INVERSE de mesuré car OPEN-DRAIN */
     if(pwmCnt <= pData->absSpeed)
-    {
         BSP_LEDOn(BSP_LED_2);
-    }
     /* Temps OFF */
     else 
-    {
         BSP_LEDOff(BSP_LED_2);
-    }
     /* Quand atteint la période */
     if(pwmCnt >= 100)
-    {
         pwmCnt = 0;
-    }
     
     
 }
