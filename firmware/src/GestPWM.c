@@ -14,6 +14,7 @@
 
 
 #include "GestPWM.h"
+#include "Mc32DriverLcd.h"
 #include "Mc32DriverAdc.h"
 #include "app.h"
 
@@ -79,10 +80,7 @@ void GPWM_DispSettings(S_pwmSettings *pData)
 
 // Execution PWM et gestion moteur à partir des info dans structure
 void GPWM_ExecPWM(S_pwmSettings *pData)
-{
-    float old_Data;
-    static int i_speeed;
-    static int i_angle; 
+{ 
     uint16_t t2_Width = 0;
     uint16_t t3_Width = 0;
  
@@ -105,13 +103,6 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
         //moteur ne tourne plus, il passe en stanby
         STBY_HBRIDGE_W = 0; // STBY LOW       
     }
-    //déterminer le nombre d'impulsion pour OC2 à partir de absSpeed
-    /*old_Data = pData->absSpeed; 
-    if ( old_Data != pData->absSpeed)
-    {
-        i_speeed ++;
-    }*/
-    //Déterminer la valeur cyclique du PWM
     
     /* Obtention de la periode du timer */
     t2_Width = DRV_TMR1_PeriodValueGet();  
@@ -119,13 +110,6 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
     t2_Width = t2_Width * (float)(pData->absSpeed/99.0);
     /* MAJ de la pulse du PWM */
     PLIB_OC_PulseWidth16BitSet(_OCMP2_BASE_ADDRESS, t2_Width);
-    
-    //déterminer le nombre d'impulsion pour OC3 à partir de absAngle
-    /* old_Data = pData->AngleSetting; 
-    if ( old_Data != pData->AngleSetting)
-    {
-        i_angle ++;
-    } */
     
     /* Obtention de la periode du timer */
     t3_Width = DRV_TMR2_PeriodValueGet();  
@@ -136,24 +120,28 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
     
  }
     
-   
-  
-    
-
 // Execution PWM software
 void GPWM_ExecPWMSoft(S_pwmSettings *pData)
 {
-    static pwmCnt = 0;
+    static uint8_t pwmCnt;
+    /* 100 cycles */
     
-    /* Gestion du PWM software */
-    if(pwmCnt < pData->absSpeed)
+    pwmCnt++;
+    
+    /* Gestion du temps ON, INVERSE CAR OPEN-DRAIN */
+    if(pwmCnt <= pData->absSpeed)
     {
-        pwmCnt++;
         BSP_LEDOn(BSP_LED_2);
     }
-    else
+    /* Temps OFF */
+    else 
     {
         BSP_LEDOff(BSP_LED_2);
+    }
+    /* Quand atteint la période */
+    if(pwmCnt >= 100)
+    {
+        pwmCnt = 0;
     }
     
     
