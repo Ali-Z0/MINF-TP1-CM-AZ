@@ -26,6 +26,9 @@
 #define ABS_MAX_SPEED 198.0
 #define SPEED_RATIO (ABS_MAX_SPEED / ADC_RES)
 
+#define SERVO_MAX 0.0024
+#define SERVO_MIN 0.0006
+
 
 
 typedef struct {

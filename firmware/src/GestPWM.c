@@ -127,12 +127,16 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
     /* MAJ de la pulse du PWM */
     PLIB_OC_PulseWidth16BitSet(_OCMP2_BASE_ADDRESS, t2_Width);
     
-    /* Obtention de la periode du timer */
-    t3_Width = DRV_TMR2_PeriodValueGet();  
+    /* Calcul de la largeur de la pulse en prenant directement en compte la frequence du timer */
+    t3_Width = (DRV_TMR2_CounterFrequencyGet()/(1/(SERVO_MAX-SERVO_MIN)))*(float)(pData->absAngle/90.0);
+    /* Ajouter le minimum pour le servo moteur */
+    t3_Width += DRV_TMR2_CounterFrequencyGet()/(1/(SERVO_MIN));
+    //*(SERVO_MAX-SERVO_MIN)
+            
     /* Calcul du rapport de la pulse avec l'angle */
-    t3_Width = t3_Width * (float)(pData->absAngle/90.0);
+    //t3_Width = 9000 * (float)(pData->absAngle/90.0);
     //génération d'une impulsion dont la largeur est proportionnelle à l'angle
-    PLIB_OC_PulseWidth16BitSet(_OCMP3_BASE_ADDRESS, pData->absAngle);
+    PLIB_OC_PulseWidth16BitSet(_OCMP3_BASE_ADDRESS, t3_Width);
     
  }
     
