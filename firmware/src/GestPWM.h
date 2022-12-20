@@ -36,11 +36,12 @@ typedef struct {
     float SpeedSetting; // consigne vitesse -99 à +99
     float AngleSetting; // consigne angle  -90 à +90
     
-    /* Variables ADC */
+    /* Variables ADC pour PWM (Association) */
     S_ADCResults AdcResBuff[FILTER_SIZE]; // Données ADC
     float adcResFilt_Can0;
     float adcResFilt_Can1;
     uint8_t cntAdc;  
+    
 } S_pwmSettings;
 
 

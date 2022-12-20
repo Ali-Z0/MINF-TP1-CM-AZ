@@ -171,7 +171,6 @@
         <Name dnOrder="0">drv_oc_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/oc/src</Path>
         <Checksum dnOrder="2">05F11D0FA55DFB5AAB69885FF789B0B6</Checksum>
-        <ProjectFileChecksum dnOrder="3">A5C1C9EE5B5A186616FF254FCBB093C2</ProjectFileChecksum>
       </Template>
       <Template dnOrder="1">
         <Name dnOrder="0">sys_ports_static.c</Name>
@@ -182,13 +181,11 @@
         <Name dnOrder="0">system_init.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">43FDC2332387ED836D00F8D657BAE603</Checksum>
-        <ProjectFileChecksum dnOrder="3">87FF56AD47F622F810BC97C7B433A7E3</ProjectFileChecksum>
       </Template>
       <Template dnOrder="3">
         <Name dnOrder="0">drv_oc_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/driver/oc</Path>
         <Checksum dnOrder="2">0496F2F0681A9421EFECF50A8979E68E</Checksum>
-        <ProjectFileChecksum dnOrder="3">C75E965FF904D40B7795C8CE5D3B5A2E</ProjectFileChecksum>
       </Template>
       <Template dnOrder="4">
         <Name dnOrder="0">main.c</Name>
@@ -198,19 +195,16 @@
         <Name dnOrder="0">drv_tmr_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/driver/tmr</Path>
         <Checksum dnOrder="2">8C64664AEDE504C4C1A03C4B9C0CC418</Checksum>
-        <ProjectFileChecksum dnOrder="3">7E550593B839F9F79D36919E148599E8</ProjectFileChecksum>
       </Template>
       <Template dnOrder="6">
         <Name dnOrder="0">drv_tmr_mapping.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/tmr/src</Path>
         <Checksum dnOrder="2">65C24AB9CFA0216FAE6039B27780D5B6</Checksum>
-        <ProjectFileChecksum dnOrder="3">98F2B3A27BD8554A6E6ED98DE5BD4415</ProjectFileChecksum>
       </Template>
       <Template dnOrder="7">
         <Name dnOrder="0">system_definitions.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">76F7C51F483C2296E974F3182F656B73</Checksum>
-        <ProjectFileChecksum dnOrder="3">DAABF9C9D41BF50F38B4D682CEB8021F</ProjectFileChecksum>
       </Template>
       <Template dnOrder="8">
         <Name dnOrder="0">system_exceptions.c</Name>
@@ -249,8 +243,7 @@
       <Template dnOrder="15">
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">7E137F997A2832CA0B522A19150F92E9</Checksum>
-        <ProjectFileChecksum dnOrder="3">1DA5B1B11DA3256C1D9BB99DBD35E322</ProjectFileChecksum>
+        <Checksum dnOrder="2">7B38E88E738AFBFE7AAAA31E91C9BF09</Checksum>
       </Template>
       <Template dnOrder="16">
         <Name dnOrder="0">app.h</Name>
@@ -259,20 +252,18 @@
       <Template dnOrder="17">
         <Name dnOrder="0">drv_tmr_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/tmr/src</Path>
-        <Checksum dnOrder="2">4C4700F29E34D2EE10CB6C70851F8861</Checksum>
-        <ProjectFileChecksum dnOrder="3">77084D5E929360E87F45AFF2F1AE171F</ProjectFileChecksum>
+        <Checksum dnOrder="2">19B74F75E635F94D259E5E1BB6AF0A0E</Checksum>
       </Template>
       <Template dnOrder="18">
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">AFB335AF6DBCF489724E9812468AE10A</Checksum>
+        <Checksum dnOrder="2">1216398F7D468FA1630EB867904772E2</Checksum>
         <ProjectFileChecksum dnOrder="3">7027D0B7D3BB8B0570BADE9381754F96</ProjectFileChecksum>
       </Template>
       <Template dnOrder="19">
         <Name dnOrder="0">drv_oc_mapping.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/oc/src</Path>
         <Checksum dnOrder="2">5FF5CD3AD70FFFBABCA9FEE23345B070</Checksum>
-        <ProjectFileChecksum dnOrder="3">7809FBAFED7C1E190B5140DDDEBBCCBF</ProjectFileChecksum>
       </Template>
       <Template dnOrder="20">
         <Name dnOrder="0">sys_clk_pic32mx.c</Name>

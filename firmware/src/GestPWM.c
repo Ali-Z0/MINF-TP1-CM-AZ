@@ -17,19 +17,35 @@
 #include "Mc32DriverLcd.h"
 #include "Mc32DriverAdc.h"
 #include "app.h"
-
-//S_pwmSettings PWMData;      // pour les settings
-//S_ADCResults ReadAdc;
+#include "peripheral/oc/plib_oc.h"
 
 S_pwmSettings PwmData = {.cntAdc=0};
         
 void GPWM_Initialize(S_pwmSettings *pData)
 {
-   // Init les data 
-   
-   // Init état du pont en H
+    // Init les data 
+    pData->cntAdc = 0;
     
-   // lance les timers et OC
+    // Init état du pont en H
+    //initialiser le Hbrige
+    BSP_EnableHbrige();
+    
+    // lance les timers et OC
+    /*initalisation des timers*/
+    // DRV_TMR0_Start();  
+    DRV_TMR0_Start();
+    // DRV_TMR1_Start();  
+    DRV_TMR1_Start();           
+    // DRV_TMR2_Start();  
+    DRV_TMR2_Start();            
+    // DRV_TMR3_Start();  
+    DRV_TMR3_Start();
+
+    /*Initialisation des OC*/
+    //init OC0 
+    DRV_OC0_Start();
+    //init OC1 
+    DRV_OC1_Start(); 
     
 }
 
@@ -149,8 +165,8 @@ void GPWM_ExecPWMSoft(S_pwmSettings *pData)
 
 void GPWM_ReadAdcFiltered(S_pwmSettings *pData)
 {
+    /* Variable comptage */
     uint8_t i = 0; 
-//    uint8_t flagZero = 0; 
     
     //lecture nouvelles valeurs ch0 et ch1
     pData->AdcResBuff[pData->cntAdc] = BSP_ReadAllADC();
@@ -172,17 +188,11 @@ void GPWM_ReadAdcFiltered(S_pwmSettings *pData)
     pData->adcResFilt_Can1 = 0;
     for(i = 0; i<FILTER_SIZE; i++)
     {
+        /* Somme des deux cannaux */
         pData->adcResFilt_Can0 += pData->AdcResBuff[i].Chan0;
         pData->adcResFilt_Can1 += pData->AdcResBuff[i].Chan1;
-        
-//        if((pData->AdcResBuff[i].Chan0 == 0) || (pData->AdcResBuff[i].Chan1 == 0))
-//            flagZero = 1;
     }  
-//    /* Moyenne du buffer avec protection de division avec 0 */
-//    if((pData->adcResFilt_Can0 != 0) && (pData->adcResFilt_Can1 != 0))
-//    {
+    /* Moyenne de la somme du filtre */
     pData->adcResFilt_Can0 /= (float)FILTER_SIZE;
     pData->adcResFilt_Can1 /= (float)FILTER_SIZE;
-//    }
-//    return flagZero;
 }

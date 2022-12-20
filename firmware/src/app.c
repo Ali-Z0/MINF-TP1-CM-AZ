@@ -159,31 +159,12 @@ void APP_Tasks ( void )
             lcd_bl_on();
             
             /* Peripherals initalisations */
-            /*initalisation des timers*/
-            // DRV_TMR0_Start();  
-            DRV_TMR0_Start();
-            // DRV_TMR1_Start();  
-            DRV_TMR1_Start();           
-            // DRV_TMR2_Start();  
-            DRV_TMR2_Start();            
-            // DRV_TMR3_Start();  
-            DRV_TMR3_Start();
-            
-            /*Initialisation des OC*/
-            //init OC0 
-            DRV_OC0_Start();
-            //init OC1 
-            DRV_OC1_Start(); 
+            GPWM_Initialize(&PwmData);
             
             //Initialisation l'ADc
             BSP_InitADC10();
             
-            //initialiser le Hbrige
-            BSP_EnableHbrige();
-            
-            /* Initialize GPWM */
-            //GPWM_Initialize(&PwmData);
-            
+            /* Update state */
             APP_UpdateState(APP_STATE_WAIT);
             
             /* All LEDS ON */
