@@ -80,19 +80,21 @@ void GPWM_DispSettings(S_pwmSettings *pData)
 // Execution PWM et gestion moteur à partir des info dans structure
 void GPWM_ExecPWM(S_pwmSettings *pData)
 {
- float old_Data;
- static int i_speeed;
- static int i_angle; 
-    
+    float old_Data;
+    static int i_speeed;
+    static int i_angle; 
+    uint16_t t2_Width = 0;
+    uint16_t t3_Width = 0;
+ 
     //tourner le moteur de gauche à droite.............................
-    if(pData->SpeedSetting <= 1)
+    if(pData->SpeedSetting < 0)
     {
         AIN1_HBRIDGE_W = 1; //AIN1 High
         AIN2_HBRIDGE_W = 0; //AIN2 LOW
         STBY_HBRIDGE_W = 1; // STBY High
     }
-    //tourner le moteur de droite à gauche.........................
-    if (pData->SpeedSetting >= 1)
+    //tourner le moteur de droite à gauche............................
+    if (pData->SpeedSetting > 0)
     {
         AIN1_HBRIDGE_W = 0; //AIN1 LOW
         AIN2_HBRIDGE_W = 1; //AIN2 High
@@ -104,22 +106,33 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
         STBY_HBRIDGE_W = 0; // STBY LOW       
     }
     //déterminer le nombre d'impulsion pour OC2 à partir de absSpeed
-    old_Data = pData->absSpeed; 
+    /*old_Data = pData->absSpeed; 
     if ( old_Data != pData->absSpeed)
     {
         i_speeed ++;
-    }
+    }*/
     //Déterminer la valeur cyclique du PWM
-    PLIB_OC_PulseWidth16BitSet(i_speeed,pData->absSpeed);
+    
+    /* Obtention de la periode du timer */
+    t2_Width = DRV_TMR1_PeriodValueGet();  
+    /* Calcul du rapport de la pulse avec la vitesse */
+    t2_Width = t2_Width * (float)(pData->absSpeed/99.0);
+    /* MAJ de la pulse du PWM */
+    PLIB_OC_PulseWidth16BitSet(_OCMP2_BASE_ADDRESS, t2_Width);
+    
     //déterminer le nombre d'impulsion pour OC3 à partir de absAngle
-      old_Data = pData->AngleSetting; 
+    /* old_Data = pData->AngleSetting; 
     if ( old_Data != pData->AngleSetting)
     {
         i_angle ++;
-    }
+    } */
     
+    /* Obtention de la periode du timer */
+    t3_Width = DRV_TMR2_PeriodValueGet();  
+    /* Calcul du rapport de la pulse avec l'angle */
+    t3_Width = t3_Width * (float)(pData->absAngle/90.0);
     //génération d'une impulsion dont la largeur est proportionnelle à l'angle
-    PLIB_OC_PulseWidth16BitSet(i_angle,pData->AngleSetting);
+    PLIB_OC_PulseWidth16BitSet(_OCMP3_BASE_ADDRESS, pData->absAngle);
     
  }
     
@@ -165,22 +178,6 @@ void GPWM_ReadAdcFiltered(S_pwmSettings *pData)
         /* Relance le filtrage */
         pData->cntAdc = 0;
     }
-    
-    
-//    
-//    /* Si le compteur de nombre d'échantillons pour filtrage atteint */
-//    if(pData->cntAdc < FILTER_SIZE)
-//    {
-//        /* Sauvegarde les cannaux dans le buffer de mesure */
-//        pData->AdcResBuff[pData->cntAdc] = BSP_ReadAllADC();
-//        /* Incremente le timer de filtrage */
-//        pData->cntAdc = pData->cntAdc +1;
-//    }
-//    else
-//    {
-//        /* Relance le filtrage */
-//        pData->cntAdc = 0;
-//    }
     
     /* Somme du buffer pour le filtrage */
     pData->adcResFilt_Can0 = 0;

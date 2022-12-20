@@ -78,11 +78,9 @@ void __ISR(_TIMER_1_VECTOR, ipl4AUTO) IntHandlerDrvTmrInstance0(void)
     //paramètrage du timer
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
     
-    //incrémenté l'indice
-     i++;
      
      //Entré lorsque 3s on passer après l'initialisation
-    if (i == 150)
+    if (i >= 150)
     {
         APP_UpdateState(APP_STATE_SERVICE_TASKS); 
        //toggle LED0 a chaque entrée dans l'interuption
@@ -90,11 +88,14 @@ void __ISR(_TIMER_1_VECTOR, ipl4AUTO) IntHandlerDrvTmrInstance0(void)
         GPWM_GetSettings(&PwmData);
         GPWM_DispSettings(&PwmData);
         GPWM_ExecPWMSoft(&PwmData);
+        GPWM_ExecPWM(&PwmData);
        //permet de ne pas attendre 3s après avoir déjà executer l'initialisation
         i = 149;
     }
     else
     {
+      //incrémenté l'indice
+      i++;
       //Lors de l'initialisation, va dans l'état vait jusqu'à attendre 3 seconde
       APP_UpdateState(APP_STATE_WAIT);      
     }
