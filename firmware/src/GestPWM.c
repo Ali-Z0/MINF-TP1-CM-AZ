@@ -99,6 +99,7 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
 { 
     uint16_t t2_Width = 0;
     uint16_t t3_Width = 0;
+    float ratioAngle = 0;
  
     //tourner le moteur de gauche à droite.............................
     if(pData->SpeedSetting < 0)
@@ -127,8 +128,10 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
     /* MAJ de la pulse du PWM */
     PLIB_OC_PulseWidth16BitSet(_OCMP2_BASE_ADDRESS, t2_Width);
     
+    /* Calcul du ratio de l'angle */
+    ratioAngle = (float)((pData->AngleSetting+90)/180.0);
     /* Calcul de la largeur de la pulse en prenant directement en compte la frequence du timer */
-    t3_Width = (DRV_TMR2_CounterFrequencyGet()/(1/(SERVO_MAX-SERVO_MIN)))*(float)(pData->absAngle/90.0);
+    t3_Width = (DRV_TMR2_CounterFrequencyGet()/(1/(SERVO_MAX-SERVO_MIN)))*ratioAngle;
     /* Ajouter le minimum pour le servo moteur */
     t3_Width += DRV_TMR2_CounterFrequencyGet()/(1/(SERVO_MIN));
     //*(SERVO_MAX-SERVO_MIN)
