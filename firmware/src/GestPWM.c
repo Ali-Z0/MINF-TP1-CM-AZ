@@ -115,7 +115,7 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
         AIN2_HBRIDGE_W = 1; //AIN2 High
         STBY_HBRIDGE_W = 1; // STBY High
     }
-    else 
+    if (pData->SpeedSetting == 0)
     {
         //moteur ne tourne plus, il passe en stanby
         STBY_HBRIDGE_W = 0; // STBY LOW       
